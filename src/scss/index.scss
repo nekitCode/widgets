@@ -1,4 +1,8 @@
-$background: rgb(125, 253, 247);
+@import "~normalize.css"; 
+
+$background: rgb(151, 253, 125);
+
+
 
 body {
     background: $background;
