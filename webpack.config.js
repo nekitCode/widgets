@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = !isProd;
 
+
 const filename = (ext) => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`; 
 
 const jsLoaders = () => {
@@ -26,6 +27,7 @@ const jsLoaders = () => {
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
+    target: "web",
      entry: ['@babel/polyfill', './index.js'],
     output: {
         filename: filename('js'),
@@ -36,15 +38,15 @@ module.exports = {
         extensions: ['.js'],
         alias: {
             '@': path.resolve(__dirname, 'src'),
-            '@core': path.resolve(__dirname, 'src/core')
+            '@core': path.resolve(__dirname, 'src/core'),
+            images: path.resolve(__dirname, 'src/assets/img/'),
         }
     },
 
     devtool: isDev ? 'source-map' : false,
     devServer: {
-        port: 7000,
+        port: 4200,
         hot: isDev,
-        open: true,
     },
 
     plugins: [
@@ -75,7 +77,12 @@ module.exports = {
           {
             test: /\.s[ac]ss$/i,
             use: [
-               MiniCssExtractPlugin.loader,
+               {
+                loader: MiniCssExtractPlugin.loader, 
+                options: {
+                    publicPath: ''
+                  },
+               },
               "css-loader",
               "sass-loader",
             ],
@@ -84,7 +91,12 @@ module.exports = {
             test: /\.m?js$/,
             exclude: /node_modules/,
             use: jsLoaders(),
-          }
+          },
+
+          {
+            test: /\.(gif|png|jpg|jpeg|svg)?$/,
+            loader: 'file-loader',
+        }
         ],
       },
 }
