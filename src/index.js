@@ -6,10 +6,11 @@ import {Listeners} from '@/components/core/Listeners';
 window.addEventListener('DOMContentLoaded', () => {
     const kanban = new KanBan('#app');
     kanban.toHTML();
-	const template = new Template();
+	new Template();
 	const listeners = new Listeners();
 	listeners.toHTML();
 	listeners.addKanBanCard();
+	listeners.dropzone();
 });
 
 
