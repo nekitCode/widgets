@@ -60,7 +60,7 @@ export class Listeners extends Template {
         this.droppedItem = null;
         this.classList.remove('hide');
     }
-
+  
 	dropzone() {
 		this.arrDropZone.forEach(drop => {
 			drop.addEventListener('dragover', this.dragOver);
