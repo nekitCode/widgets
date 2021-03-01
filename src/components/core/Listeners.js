@@ -99,5 +99,4 @@ export class Listeners extends Template {
 	dragLeave() {
 		this.classList.remove('hoverEffect');
 	}
-
 }
